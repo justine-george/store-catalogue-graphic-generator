@@ -1,6 +1,8 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { PriceDetails } from "../App";
 import { css } from "@emotion/react";
+import i18n from "../i18n";
+import { useTranslation } from "react-i18next";
 
 interface PriceTableProps {
   selectedVeggies: string[];
@@ -13,9 +15,18 @@ export const PriceTable: React.FC<PriceTableProps> = ({
   updatePrice,
   priceDetails,
 }) => {
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    // change language to malayalam
+    i18n.changeLanguage("ml");
+  }, []);
+
   const handlePriceChange =
     (veggie: string) => (event: ChangeEvent<HTMLInputElement>) => {
-      updatePrice(veggie, event.target.value);
+      let value = parseFloat(event.target.value);
+      if (value < 0) value = 0;
+      updatePrice(veggie, value.toString());
     };
 
   const tableHeaderStyles = css`
@@ -39,20 +50,26 @@ export const PriceTable: React.FC<PriceTableProps> = ({
             <td
               css={css`
                 width: 200px;
+                font-family: "NotoSansMalayalam Medium", sans-serif;
+                font-weight: 500;
               `}
             >
-              {veggie}
+              {t(veggie)}
             </td>
             <td>
               <input
                 type="number"
+                min={0}
                 value={priceDetails[veggie] || ""}
                 onChange={handlePriceChange(veggie)}
-                placeholder="Price in INR"
+                placeholder={t("Price in INR")}
                 css={css`
                   padding: 5px 10px;
                   text-align: right;
                   width: 200px;
+                  border-radius: 0;
+                  border: none;
+                  font-family: "NotoSansMalayalam Regular", sans-serif;
                 `}
               />
             </td>

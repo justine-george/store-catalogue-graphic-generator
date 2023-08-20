@@ -8,7 +8,7 @@ import cabbage from "./cabbage.png";
 import drumstick from "./drumstick.png";
 import snakegourd from "./snakegourd.png";
 import ladiesfinger from "./ladiesfinger.png";
-import beans from "./beans.png";
+import longbeans from "./longbeans.png";
 import cauliflower from "./cauliflower.png";
 import onion from "./onion.png";
 import sweetpotato from "./sweetpotato.png";
@@ -20,6 +20,8 @@ import yellowlemon from "./yellowlemon.png";
 import beetroot from "./beetroot.png";
 import carrot from "./carrot.png";
 import apple from "./apple.png";
+import potato from "./potato.png";
+import greenbeans from "./greenbeans.png";
 
 export const VeggieImages = {
   tomato,
@@ -32,7 +34,7 @@ export const VeggieImages = {
   drumstick,
   snakegourd,
   ladiesfinger,
-  beans,
+  longbeans,
   cauliflower,
   onion,
   sweetpotato,
@@ -44,4 +46,6 @@ export const VeggieImages = {
   beetroot,
   carrot,
   apple,
+  potato,
+  greenbeans,
 };

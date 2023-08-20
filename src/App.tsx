@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import { toPng } from "html-to-image";
 import { VeggieSelector } from "./components/VeggieSelector";
@@ -6,16 +6,22 @@ import { PriceTable } from "./components/PriceTable";
 import "./App.css";
 import { GraphicPoster } from "./components/GraphicPoster";
 import { COLORS, SIZES } from "./constants";
+import i18n from "./i18n";
+import { useTranslation } from "react-i18next";
+import { getRawDate } from "./common";
 
 export interface PriceDetails {
   [name: string]: number;
 }
 
 function App() {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const [selectedVeggies, setSelectedVeggies] = useState<string[]>([]);
   const [priceDetails, setPriceDetails] = useState<PriceDetails>({});
-  const [validTillDate, setValidTillDate] = useState<Date>();
+  const [validTillDate, setValidTillDate] = useState<Date>(
+    getRawDate(new Date().toISOString())
+  );
 
   const handleVeggieSelection = useCallback((veggie: string) => {
     setSelectedVeggies((prev) => {
@@ -44,36 +50,48 @@ function App() {
   }, []);
 
   const generateImage = useCallback(() => {
-    if (!ref.current) return;
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        // Now capture the image using html-to-image
+        if (!ref.current) return;
 
-    toPng(ref.current, {
-      cacheBust: true,
-      backgroundColor: COLORS.BODY_BACKGROUND_COLOR,
-    })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "vegetable-catalogue.png";
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch(console.error);
+        toPng(ref.current, {
+          cacheBust: true,
+          backgroundColor: COLORS.BODY_BACKGROUND_COLOR,
+        })
+          .then((dataUrl) => {
+            const link = document.createElement("a");
+            link.download = "vegetable-catalogue.png";
+            link.href = dataUrl;
+            link.click();
+          })
+          .catch(console.error);
+      });
+    }
   }, []);
 
   const veggieSelectorStyle = css`
     padding: 20px;
     margin: auto;
+    width: 400px;
   `;
 
   const priceTableStyle = css`
     margin: auto;
     margin-bottom: 20px;
     padding: 16px;
+    width: 400px;
   `;
 
   const graphicPosterStyle = css`
+    margin-top: 20px;
     width: ${SIZES.POSTER_WIDTH};
-    // margin: auto;
   `;
+
+  useEffect(() => {
+    // change language to malayalam
+    i18n.changeLanguage("ml");
+  }, []);
 
   const filteredPriceDetails: PriceDetails = Object.keys(priceDetails)
     .filter((veggie) => selectedVeggies.includes(veggie))
@@ -110,14 +128,16 @@ function App() {
       <button
         onClick={generateImage}
         css={css`
-          max-width: 200px;
+          width: 350px;
           margin: auto;
           margin-bottom: 40px;
+          font-size: 1.5em;
+          font-family: "NotoSansMalayalam Medium", sans-serif;
         `}
       >
-        Generate Poster
+        {t("Generate Poster")}
       </button>
-      {selectedVeggies.length > 0 && (
+      {Object.keys(filteredPriceDetails).length > 0 && (
         <div ref={ref} css={graphicPosterStyle}>
           <GraphicPoster
             catalogueData={filteredPriceDetails}

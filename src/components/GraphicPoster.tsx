@@ -3,7 +3,7 @@ import { PriceDetails } from "../App";
 import { VeggieImages } from "../assets/images";
 import { css } from "@emotion/react";
 import headerImageSrc from "../assets/images/header.png";
-import offerImageSrc from "../assets/images/offer.png";
+import offerImageSrc from "../assets/images/offer3.png";
 import { COLORS, SIZES } from "../constants";
 import "../i18n";
 import { useTranslation } from "react-i18next";
@@ -82,18 +82,65 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
         {/* Store Logo */}
         <div
           css={css`
-            padding: 10px;
-            background: #181818;
-            color: white;
-            font-size: 2em;
-            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px 20px;
+            background: #daf7a6;
+            // color: white;
+            font-size: 3rem;
+            // max-width: 300px;
             position: absolute;
-            // margin: 10px;
+            // border: 1px solid green;
+            border-radius: 20px;
+            margin: 15px;
+            margin-top: 10px;
             top: 0;
             left: 0;
           `}
         >
-          <span>N. A. Stores</span>
+          <div
+            css={css`
+              font-size: 3.2rem;
+              font-family: "NotoSansMalayalam Bold", sans-serif;
+              height: 55px;
+            `}
+          >
+            <span>{t("Nanthalath")}</span>
+          </div>
+          <div
+            css={css`
+              font-size: 2.8rem;
+              font-family: "Overpass SemiBold", sans-serif;
+              height: 55px;
+            `}
+          >
+            <span>N. A. STORES</span>
+          </div>
+          <div
+            css={css`
+              font-size: 1.2rem;
+              font-family: "Overpass SemiBold", sans-serif;
+            `}
+          >
+            <span>CHAKKITTAPARA</span>
+          </div>
+          <div
+            css={css`
+              font-size: 1rem;
+              font-family: "Overpass SemiBold", sans-serif;
+            `}
+          >
+            <span>📱Phone : 9447633921</span>
+          </div>
+          {/* <div
+            css={css`
+              font-size: 1rem;
+              font-family: "Overpass SemiBold", sans-serif;
+            `}
+          >
+            <span>{t("Slogan")}</span>
+          </div> */}
         </div>
 
         {/* Image Upload */}
@@ -125,12 +172,12 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
         {/* Offer sticker */}
         <div
           css={css`
-            padding: 10px;
+            padding-left: 10px;
             color: white;
             max-width: 250px;
             position: absolute;
-            bottom: 0;
-            left: 0;
+            top: 0;
+            right: 0;
             // margin: 10px;
           `}
         >
@@ -138,7 +185,7 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
             src={offerImageSrc}
             alt="offer-sticker"
             css={css`
-              width: 200px;
+              width: 230px;
               height: auto;
               object-fit: contain;
             `}
@@ -146,22 +193,25 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
         </div>
 
         {/* Offer valid till */}
-        <div
-          css={css`
-            padding: 10px;
-            background: #181818;
-            color: white;
-            max-width: 250px;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            font-family: "Noto Sans Malayalam", sans-serif;
-            // margin: 10px;
-          `}
-        >
-          <span>{t("Offer Valid Till")}: </span>
-          {formatDateToDDMMYYYY(validTillDate)}
-        </div>
+        {validTillDate && (
+          <div
+            css={css`
+              padding: 10px;
+              background: #181818;
+              color: white;
+              max-width: 250px;
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              font-family: "NotoSansMalayalam Regular", sans-serif;
+              border-radius: 8px;
+              margin: 5px;
+            `}
+          >
+            <span>{t("Offer Valid Till")}: </span>
+            {formatDateToDDMMYYYY(validTillDate)}
+          </div>
+        )}
       </div>
 
       {/* Catalogue Data Grid */}
@@ -169,9 +219,9 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "20px",
+          gap: "10px",
           background: COLORS.BODY_BACKGROUND_COLOR,
-          padding: "20px",
+          padding: "10px",
         }}
       >
         {Object.entries(catalogueData).map(([veggie, price]) => (
@@ -180,7 +230,14 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
             style={{
               display: "flex",
               flexDirection: "column",
+              justifyContent: "center",
               alignItems: "center",
+              height: "180px",
+              // TODO: border or not?
+              border: "1px solid grey",
+              paddingBottom: "10px",
+              borderRadius: "20px",
+              position: "relative",
             }}
           >
             {/* Load image for the vegetable from assets */}
@@ -188,20 +245,58 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
               src={getVeggieImagePath(veggie)!}
               alt={veggie}
               css={css`
-                width: 100px;
-                height: 100px;
+                width: 160px;
+                height: 160px;
                 object-fit: contain;
               `}
             />
-            <span
+            <div
               css={css`
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
                 font-size: 1.1em;
-                font-family: "Noto Sans Malayalam", sans-serif;
+                font-family: "NotoSansMalayalam Medium", sans-serif;
                 font-weight: 500;
               `}
             >
-              {t(veggie)}: Rs. {price}
-            </span>
+              <div
+                css={css`
+                  font-size: 1em;
+                  font-family: "NotoSansMalayalam Medium", sans-serif;
+                  font-weight: 500;
+                  margin-right: 8px;
+                  position: absolute;
+                  bottom: 5px;
+                  left: 10px;
+                `}
+              >
+                {t(veggie)}
+              </div>
+              <div
+                css={css`
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 2.3em;
+                  font-family: "NotoSansMalayalam Medium", sans-serif;
+                  font-weight: 500;
+                  position: absolute;
+                  bottom: 2px;
+                  right: 2px;
+
+                  background-color: #d22b2b;
+                  color: white;
+                  max-width: 80px;
+                  padding: 7px 10px 0px 10px;
+                  border-radius: 30%;
+                `}
+              >
+                <span>{price}</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>

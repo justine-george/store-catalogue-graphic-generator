@@ -1,5 +1,8 @@
 {
   "Welcome": "Welcome",
+  "Price in INR": "Price in INR",
+  "Generate Poster": "Generate Poster",
+  "Nanthalath": "Nanthalath",
   "Offer Valid Till": "Offer Valid Till",
   "Tomato": "Tomato",
   "Indian Cucumber": "Indian Cucumber",
@@ -11,7 +14,7 @@
   "Drumstick": "Drumstick",
   "Snake Gourd": "Snake Gourd",
   "Ladies Finger": "Ladies Finger",
-  "Beans": "Beans",
+  "Long Beans": "Long Beans",
   "Cauliflower": "Cauliflower",
   "Onion": "Onion",
   "Sweet Potato": "Sweet Potato",
@@ -22,5 +25,7 @@
   "Yellow Lemon": "Yellow Lemon",
   "Beetroot": "Beetroot",
   "Carrot": "Carrot",
-  "Apple": "Apple"
+  "Apple": "Apple",
+  "Potato": "Potato",
+  "Green Beans": "Green Beans"
 }

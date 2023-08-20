@@ -1,5 +1,8 @@
 {
   "Welcome": "സ്വാഗതം",
+  "Price in INR": "INR വില",
+  "Generate Poster": "പോസ്റ്റർ ഉണ്ടാക്കുക",
+  "Nanthalath": "നന്തലത്ത്",
   "Offer Valid Till": "ഓഫർ കാലാവധി",
   "Tomato": "തക്കാളി",
   "Indian Cucumber": "വെള്ളരി",
@@ -11,7 +14,7 @@
   "Drumstick": "മുരിങ്ങ",
   "Snake Gourd": "പടവലം",
   "Ladies Finger": "വെണ്ട",
-  "Beans": "പയർ",
+  "Long Beans": "പയർ",
   "Cauliflower": "കോളിഫ്ലവർ",
   "Onion": "സവോള",
   "Sweet Potato": "മധുരക്കിഴങ്ങ്",
@@ -22,5 +25,7 @@
   "Yellow Lemon": "ചെറുനാരങ്ങ",
   "Beetroot": "ബീറ്റ്റൂട്ട്",
   "Carrot": "കാരറ്റ്",
-  "Apple": "ആപ്പിൾ"
+  "Apple": "ആപ്പിൾ",
+  "Potato": "ഉരുളക്കിഴങ്ങ്",
+  "Green Beans": "ഗ്രീന്‍ ബീന്‍സ്"
 }

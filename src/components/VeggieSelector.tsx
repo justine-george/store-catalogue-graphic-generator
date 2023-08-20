@@ -1,4 +1,8 @@
 import { css } from "@emotion/react";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
+import { useEffect } from "react";
+import { getRawDate } from "../common";
 
 interface VeggieSelectorProps {
   onSelect: (veggie: string) => void;
@@ -18,7 +22,7 @@ const presetVeggies = [
   "Drumstick", // muringa
   "Snake Gourd", // padavalam
   "Ladies Finger", // venda
-  "Beans", // payar
+  "Long Beans", // payar
   "Cauliflower", // cauliflower
   "Onion", // savola
   "Sweet Potato", // madura kizhang
@@ -30,6 +34,8 @@ const presetVeggies = [
   "Beetroot", // beetroot
   "Carrot", // carrot
   "Apple", // apple
+  "Potato", // urulakizhang
+  "Green Beans", // green beans
 ];
 
 export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
@@ -38,19 +44,22 @@ export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
   validTillDate,
   onDateChange,
 }) => {
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    // change language to malayalam
+    i18n.changeLanguage("ml");
+  }, []);
+
   const veggieChipStyle = (veggie: string) => css`
     margin: 1px;
+    font-family: "NotoSansMalayalam Regular", sans-serif;
+    font-weight: 400;
     ${selectedVeggies.includes(veggie) ? "background-color: green" : ""}
   `;
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const rawDate = new Date(event.target.value);
-    const adjustedDate = new Date(
-      rawDate.getUTCFullYear(),
-      rawDate.getUTCMonth(),
-      rawDate.getUTCDate()
-    );
-    onDateChange(adjustedDate);
+    onDateChange(getRawDate(event.target.value));
   };
 
   return (
@@ -61,15 +70,17 @@ export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
           onClick={() => onSelect(veggie)}
           css={veggieChipStyle(veggie)}
         >
-          {veggie}
+          {t(veggie)}
         </button>
       ))}
       <div
         css={css`
           padding-top: 40px;
+          font-size: 1em;
+          font-family: "NotoSansMalayalam Medium", sans-serif;
         `}
       >
-        <span>Offer Valid Till: </span>
+        <span>{t("Offer Valid Till")}: </span>
         <input
           type="date"
           value={
