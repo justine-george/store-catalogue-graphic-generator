@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PriceDetails } from "../App";
 import { VeggieImages } from "../assets/images";
 import { css } from "@emotion/react";
 import headerImageSrc from "../assets/images/header.png";
 import offerImageSrc from "../assets/images/offer.png";
 import { COLORS, SIZES } from "../constants";
+import "../i18n";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 interface GraphicPosterProps {
   catalogueData: PriceDetails;
@@ -17,6 +20,7 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
   catalogueData,
   validTillDate,
 }) => {
+  const { t } = useTranslation();
   const [headerImage, setHeaderImage] = useState<string | null>(headerImageSrc);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +60,11 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
 
     return `${day}-${month}-${year}`;
   }
+
+  useEffect(() => {
+    // change language to malayalam
+    i18n.changeLanguage("ml");
+  }, []);
 
   return (
     <div
@@ -146,10 +155,11 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
             position: absolute;
             bottom: 0;
             right: 0;
+            font-family: "Noto Sans Malayalam", sans-serif;
             // margin: 10px;
           `}
         >
-          <span>Offer Valid Till: </span>
+          <span>{t("Offer Valid Till")}: </span>
           {formatDateToDDMMYYYY(validTillDate)}
         </div>
       </div>
@@ -185,11 +195,12 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
             />
             <span
               css={css`
-                font-size: 1em;
-                font-weight: 600;
+                font-size: 1.1em;
+                font-family: "Noto Sans Malayalam", sans-serif;
+                font-weight: 500;
               `}
             >
-              {veggie}: Rs. {price}
+              {t(veggie)}: Rs. {price}
             </span>
           </div>
         ))}
