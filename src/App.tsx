@@ -5,7 +5,7 @@ import { VeggieSelector } from "./components/VeggieSelector";
 import { PriceTable } from "./components/PriceTable";
 import "./App.css";
 import { GraphicPoster } from "./components/GraphicPoster";
-import { COLORS, SIZES } from "./constants";
+import { COLORS, EXPORT_POSTER_NAME, SIZES } from "./constants";
 import i18n from "./i18n";
 import { useTranslation } from "react-i18next";
 import { getRawDate } from "./common";
@@ -61,7 +61,7 @@ function App() {
         })
           .then((dataUrl) => {
             const link = document.createElement("a");
-            link.download = "vegetable-catalogue.png";
+            link.download = EXPORT_POSTER_NAME;
             link.href = dataUrl;
             link.click();
           })
@@ -84,7 +84,6 @@ function App() {
   `;
 
   const graphicPosterStyle = css`
-    margin-top: 20px;
     width: ${SIZES.POSTER_WIDTH};
   `;
 
