@@ -1,5 +1,9 @@
 {
   "Welcome": "Welcome",
+  "SelectNVeggiesPrompt": "Select {{count}} Vegetables",
+  "Vegetable": "Vegetable",
+  "Price": "Price",
+  "Value should be between 1 and 999": "Value should be between 1 and 999",
   "Price in INR": "Price in INR",
   "Generate Poster": "Generate Poster",
   "Nanthalath": "Nanthalath",

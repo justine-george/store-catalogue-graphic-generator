@@ -3,12 +3,12 @@ import { css } from "@emotion/react";
 import { toPng } from "html-to-image";
 import { VeggieSelector } from "./components/VeggieSelector";
 import { PriceTable } from "./components/PriceTable";
-import "./App.css";
 import { GraphicPoster } from "./components/GraphicPoster";
-import { COLORS, EXPORT_POSTER_NAME, SIZES } from "./constants";
-import i18n from "./i18n";
+import { COLORS, COUNTS, FONTS, NAMES, SIZES } from "./constants";
 import { useTranslation } from "react-i18next";
-import { getRawDate } from "./common";
+import { getRawDate, randomVeggieEmoji } from "./common";
+import i18n from "./i18n";
+import "./App.css";
 
 export interface PriceDetails {
   [name: string]: number;
@@ -17,17 +17,37 @@ export interface PriceDetails {
 function App() {
   const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentVeggieEmoji, setCurrentVeggieEmoji] = useState(
+    randomVeggieEmoji()
+  );
   const [selectedVeggies, setSelectedVeggies] = useState<string[]>([]);
   const [priceDetails, setPriceDetails] = useState<PriceDetails>({});
   const [validTillDate, setValidTillDate] = useState<Date>(
     getRawDate(new Date().toISOString())
   );
 
+  // change the veggie emoji shown on the spinner every 500ms
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setCurrentVeggieEmoji(randomVeggieEmoji());
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
+
+  // change language to malayalam
+  useEffect(() => {
+    i18n.changeLanguage("ml");
+  }, []);
+
   const handleVeggieSelection = useCallback((veggie: string) => {
     setSelectedVeggies((prev) => {
       if (prev.includes(veggie)) {
         return prev.filter((v) => v !== veggie);
-      } else if (prev.length < 12) {
+      } else if (prev.length < COUNTS.ITEM_COUNT_LIMIT) {
         return [...prev, veggie];
       }
       return prev;
@@ -50,10 +70,14 @@ function App() {
   }, []);
 
   const generateImage = useCallback(() => {
+    setIsLoading(true);
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () {
         // Now capture the image using html-to-image
-        if (!ref.current) return;
+        if (!ref.current) {
+          setIsLoading(false);
+          return;
+        }
 
         toPng(ref.current, {
           cacheBust: true,
@@ -61,14 +85,37 @@ function App() {
         })
           .then((dataUrl) => {
             const link = document.createElement("a");
-            link.download = EXPORT_POSTER_NAME;
+            link.download = NAMES.EXPORT_POSTER_NAME;
             link.href = dataUrl;
             link.click();
+            setIsLoading(false);
           })
-          .catch(console.error);
+          .catch((error) => {
+            console.error(error);
+            setIsLoading(false);
+          });
       });
+    } else {
+      setIsLoading(false);
     }
   }, []);
+
+  const isPosterGridValid = (filteredPriceDetails: PriceDetails) =>
+    Object.values(filteredPriceDetails).filter((price) => price !== 0)
+      .length === COUNTS.ITEM_COUNT_LIMIT;
+
+  const filteredPriceDetails: PriceDetails = Object.keys(priceDetails)
+    .filter((veggie) => selectedVeggies.includes(veggie))
+    .reduce((obj, veggie) => {
+      obj[veggie] = priceDetails[veggie];
+      return obj;
+    }, {} as PriceDetails);
+
+  const containerStyle = css`
+    display: flex;
+    flex-direction: column;
+    max-width: ${SIZES.POSTER_WIDTH};
+  `;
 
   const veggieSelectorStyle = css`
     padding: 20px;
@@ -87,26 +134,49 @@ function App() {
     width: ${SIZES.POSTER_WIDTH};
   `;
 
-  useEffect(() => {
-    // change language to malayalam
-    i18n.changeLanguage("ml");
-  }, []);
+  const spinnerContainerStyle = css`
+    position: fixed;
+    top: 38%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(218, 247, 166, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 20%;
+    padding: 20px;
+    width: 21vw;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  `;
 
-  const filteredPriceDetails: PriceDetails = Object.keys(priceDetails)
-    .filter((veggie) => selectedVeggies.includes(veggie))
-    .reduce((obj, veggie) => {
-      obj[veggie] = priceDetails[veggie];
-      return obj;
-    }, {} as PriceDetails);
+  const generateButtonStyle = css`
+    width: 350px;
+    margin: auto;
+    margin-bottom: 40px;
+    font-size: 1.5em;
+    ${FONTS.STYLE_MALAYALAM_FONT_MEDIUM}
+    ${(isLoading || !isPosterGridValid(filteredPriceDetails)) &&
+    `cursor: not-allowed; opacity: 0.6;`}
+  `;
 
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: column;
-        max-width: ${SIZES.POSTER_WIDTH};
-      `}
-    >
+    <div css={containerStyle}>
+      {isLoading && (
+        <div css={spinnerContainerStyle}>
+          <div className="spinner">{currentVeggieEmoji}</div>
+        </div>
+      )}
+      <div
+        css={css`
+          ${FONTS.STYLE_MALAYALAM_FONT_REGULAR}
+        `}
+      >
+        <span>
+          {t("SelectNVeggiesPrompt", { count: COUNTS.ITEM_COUNT_LIMIT })}
+        </span>
+      </div>
       <div css={veggieSelectorStyle}>
         <VeggieSelector
           onSelect={handleVeggieSelection}
@@ -126,17 +196,12 @@ function App() {
       )}
       <button
         onClick={generateImage}
-        css={css`
-          width: 350px;
-          margin: auto;
-          margin-bottom: 40px;
-          font-size: 1.5em;
-          font-family: "NotoSansMalayalam Medium", sans-serif;
-        `}
+        disabled={isLoading || !isPosterGridValid(filteredPriceDetails)}
+        css={generateButtonStyle}
       >
         {t("Generate Poster")}
       </button>
-      {Object.keys(filteredPriceDetails).length > 0 && (
+      {isPosterGridValid(filteredPriceDetails) && (
         <div ref={ref} css={graphicPosterStyle}>
           <GraphicPoster
             catalogueData={filteredPriceDetails}

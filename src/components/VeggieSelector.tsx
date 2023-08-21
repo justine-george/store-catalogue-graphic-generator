@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
-import i18n from "../i18n";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getRawDate } from "../common";
+import { FONTS } from "../constants";
+import i18n from "../i18n";
 
 interface VeggieSelectorProps {
   onSelect: (veggie: string) => void;
@@ -46,21 +47,36 @@ export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  // change language to malayalam
   useEffect(() => {
-    // change language to malayalam
     i18n.changeLanguage("ml");
   }, []);
 
+  const handleDateChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onDateChange(getRawDate(event.target.value));
+    },
+    [onDateChange]
+  );
+
   const veggieChipStyle = (veggie: string) => css`
     margin: 1px;
-    font-family: "NotoSansMalayalam Regular", sans-serif;
+    ${FONTS.STYLE_MALAYALAM_FONT_REGULAR}
     font-weight: 400;
     ${selectedVeggies.includes(veggie) ? "background-color: green" : ""}
   `;
 
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onDateChange(getRawDate(event.target.value));
-  };
+  const offerValidTillContainerStyle = css`
+    padding-top: 40px;
+    font-size: 1em;
+    ${FONTS.STYLE_MALAYALAM_FONT_MEDIUM}
+  `;
+
+  const datePickerStyle = css`
+    padding: 5px 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  `;
 
   return (
     <div>
@@ -73,25 +89,15 @@ export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
           {t(veggie)}
         </button>
       ))}
-      <div
-        css={css`
-          padding-top: 40px;
-          font-size: 1em;
-          font-family: "NotoSansMalayalam Medium", sans-serif;
-        `}
-      >
+      <div css={offerValidTillContainerStyle}>
         <span>{t("Offer Valid Till")}: </span>
         <input
+          css={datePickerStyle}
           type="date"
           value={
             validTillDate ? validTillDate?.toISOString().split("T")[0] : ""
           }
           onChange={handleDateChange}
-          css={css`
-            padding: 5px 10px;
-            margin-left: 20px;
-            margin-bottom: 10px;
-          `}
         />
       </div>
     </div>

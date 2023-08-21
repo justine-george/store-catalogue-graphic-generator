@@ -1,5 +1,9 @@
 {
   "Welcome": "സ്വാഗതം",
+  "SelectNVeggiesPrompt": "{{count}} പച്ചക്കറികൾ തിരഞ്ഞെടുക്കുക",
+  "Vegetable": "പച്ചക്കറി",
+  "Price": "വില",
+  "Value should be between 1 and 999": "വില 1 മുതല്‍ 999 വരെ ആയിരിക്കണം",
   "Price in INR": "INR വില",
   "Generate Poster": "പോസ്റ്റർ ഉണ്ടാക്കുക",
   "Nanthalath": "നന്തലത്ത്",
