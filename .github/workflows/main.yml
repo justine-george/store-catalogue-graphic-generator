@@ -1,4 +1,4 @@
-name: Deploy with Wrangler
+name: Deploy Store-Catalogue to Cloudflare Pages with Wrangler
 
 on:
   push:
