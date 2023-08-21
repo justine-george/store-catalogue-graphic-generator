@@ -4,13 +4,13 @@
 
 A tool made for local businesses in Kerala to simplify their marketing process. With this application, vendors can select from a range of vegetables, set their desired prices, and generate an elegant PNG catalogue ideal for promotions, printing, and uploads. Notably, the application is bilingual, allowing users to seamlessly switch between languages, catering to the linguistic preferences of local businesses.
 
-## 🛠️ Built With:
+## 🎥 Demonstration
 
-- Vite: A lightning-fast frontend build tool.
-- React: JavaScript library for building user interfaces.
-- @emotion/react: Library for writing CSS styles with JavaScript.
-- i18next & react-i18next: Internationalization-framework for JavaScript, enabling seamless switching between languages.
-- html-to-image: Convert your HTML node to images.
+![App Demonstration](https://github.com/justinegeo96/store-catalogue-graphic-generator/blob/89be3cb2d216fc93c13800cd25e5b4e05c8ec89e/demo/demo.gif)
+
+## 🖼️ Generated Catalogue (Side by side)
+
+![Sample Generated Catalogue](https://github.com/justinegeo96/store-catalogue-graphic-generator/blob/daed1c0a56d7ea1a9eee9df587a337b349faca83/demo/combined-screenshot.png)
 
 ## 🌱 Features:
 
@@ -26,6 +26,14 @@ A tool made for local businesses in Kerala to simplify their marketing process. 
 2. Pricing: Post selection, set the prices for the selected vegetables.
 3. Generate: Confirm your list and prices and click on 'Generate Catalogue'.
 4. Download/Share: The PNG catalogue file will be generated, ready for download or direct sharing.
+
+## 🛠️ Built With:
+
+- Vite: A lightning-fast frontend build tool.
+- React: JavaScript library for building user interfaces.
+- @emotion/react: Library for writing CSS styles with JavaScript.
+- i18next & react-i18next: Internationalization-framework for JavaScript, enabling seamless switching between languages.
+- html-to-image: Convert your HTML node to images.
 
 ## 📚 Development:
 
