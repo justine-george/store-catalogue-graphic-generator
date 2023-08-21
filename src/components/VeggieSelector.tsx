@@ -1,9 +1,8 @@
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { getRawDate } from "../common";
 import { FONTS } from "../constants";
-import i18n from "../i18n";
 
 interface VeggieSelectorProps {
   onSelect: (veggie: string) => void;
@@ -46,11 +45,6 @@ export const VeggieSelector: React.FC<VeggieSelectorProps> = ({
   onDateChange,
 }) => {
   const { t } = useTranslation();
-
-  // change language to malayalam
-  useEffect(() => {
-    i18n.changeLanguage("ml");
-  }, []);
 
   const handleDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

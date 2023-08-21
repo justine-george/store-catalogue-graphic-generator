@@ -1,9 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { PriceDetails } from "../App";
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
 import { FONTS } from "../constants";
-import i18n from "../i18n";
 
 interface PriceTableProps {
   selectedVeggies: string[];
@@ -18,11 +17,6 @@ export const PriceTable: React.FC<PriceTableProps> = ({
 }) => {
   const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  // change language to malayalam
-  useEffect(() => {
-    i18n.changeLanguage("ml");
-  }, []);
 
   const handlePriceChange =
     (veggie: string) => (event: ChangeEvent<HTMLInputElement>) => {

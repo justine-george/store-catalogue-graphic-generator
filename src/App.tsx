@@ -7,6 +7,8 @@ import { GraphicPoster } from "./components/GraphicPoster";
 import { COLORS, COUNTS, FONTS, NAMES, SIZES } from "./constants";
 import { useTranslation } from "react-i18next";
 import { getRawDate, randomVeggieEmoji } from "./common";
+import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import i18n from "./i18n";
 import "./App.css";
 
@@ -42,12 +44,16 @@ function App() {
   useEffect(() => {
     const storedVeggies = localStorage.getItem("selectedVeggies");
     const storedPrices = localStorage.getItem("priceDetails");
+    const lang = localStorage.getItem("language");
 
     if (storedVeggies) {
       setSelectedVeggies(JSON.parse(storedVeggies));
     }
     if (storedPrices) {
       setPriceDetails(JSON.parse(storedPrices));
+    }
+    if (lang) {
+      i18n.changeLanguage(JSON.parse(lang));
     }
   }, []);
 
@@ -58,11 +64,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem("priceDetails", JSON.stringify(priceDetails));
   }, [priceDetails]);
-
-  // change language to malayalam
   useEffect(() => {
-    i18n.changeLanguage("ml");
-  }, []);
+    localStorage.setItem("language", JSON.stringify(i18n.language));
+  }, [i18n.language]);
 
   const handleVeggieSelection = useCallback((veggie: string) => {
     setSelectedVeggies((prev) => {
@@ -119,6 +123,17 @@ function App() {
     } else {
       setIsLoading(false);
     }
+  }, []);
+
+  // Toggle language between English and Malayalam
+  const handleLanguageSwitch = useCallback(() => {
+    const newLang = i18n.language === "ml" ? "en" : "ml";
+    i18n.changeLanguage(newLang);
+  }, []);
+
+  const handleResetData = useCallback(() => {
+    setSelectedVeggies([]);
+    setPriceDetails({});
   }, []);
 
   const isPosterGridValid = (filteredPriceDetails: PriceDetails) =>
@@ -182,6 +197,33 @@ function App() {
     `cursor: not-allowed; opacity: 0.6;`}
   `;
 
+  const selectVeggiePromptStyle = css`
+    ${FONTS.STYLE_MALAYALAM_FONT_REGULAR}
+  `;
+
+  const buttonRowStyle = css`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 0 20px;
+  `;
+
+  const circularButtonStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid grey;
+    background-color: #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #ddd;
+    }
+  `;
+
   return (
     <div css={containerStyle}>
       {isLoading && (
@@ -189,11 +231,27 @@ function App() {
           <div className="spinner">{currentVeggieEmoji}</div>
         </div>
       )}
-      <div
-        css={css`
-          ${FONTS.STYLE_MALAYALAM_FONT_REGULAR}
-        `}
-      >
+
+      <div css={buttonRowStyle}>
+        <div
+          css={circularButtonStyle}
+          onClick={handleResetData}
+          title="Reset Data"
+        >
+          <RefreshOutlinedIcon />
+          {/* <span className="material-symbols-outlined">remove_selection</span> */}
+        </div>
+        <div
+          css={circularButtonStyle}
+          onClick={handleLanguageSwitch}
+          title="Switch Language"
+        >
+          {/* <span className="material-symbols-outlined">language</span> */}
+          <LanguageOutlinedIcon />
+        </div>
+      </div>
+
+      <div css={selectVeggiePromptStyle}>
         <span>
           {t("SelectNVeggiesPrompt", { count: COUNTS.ITEM_COUNT_LIMIT })}
         </span>

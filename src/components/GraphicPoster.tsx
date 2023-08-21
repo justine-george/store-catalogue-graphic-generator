@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PriceDetails } from "../App";
 import { VeggieImages } from "../assets/images";
 import { formatDateToDDMMYYYY } from "../common";
@@ -6,8 +6,7 @@ import { COLORS, FONTS, SIZES } from "../constants";
 import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import headerImageSrc from "../assets/images/header.png";
-import offerImageSrc from "../assets/images/offer3.png";
-import i18n from "../i18n";
+import offerImageSrc from "../assets/images/offer.png";
 
 interface GraphicPosterProps {
   catalogueData: PriceDetails;
@@ -22,11 +21,6 @@ export const GraphicPoster: React.FC<GraphicPosterProps> = ({
 }) => {
   const { t } = useTranslation();
   const [headerImage, setHeaderImage] = useState<string | null>(headerImageSrc);
-
-  // change language to malayalam
-  useEffect(() => {
-    i18n.changeLanguage("ml");
-  }, []);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];

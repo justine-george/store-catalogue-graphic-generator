@@ -11,6 +11,7 @@ i18n
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },
+    lng: "ml", // Set malayalam as the default language
     fallbackLng: "en",
     detection: {
       order: [
