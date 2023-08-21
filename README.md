@@ -1,43 +1,59 @@
 # Local Business Price Catalogue Generator
 
->A simple, yet effective tool tailored for local businesses. This application allows vendors to select vegetables from a curated list, set prices for them, and then effortlessly generate a price catalogue in PNG format. An ideal solution for businesses aiming to upscale their marketing strategies and product displays.
+A tool made for local businesses to simplify their marketing process. With this application, vendors can select from a range of vegetables, set their desired prices, and generate an elegant PNG catalogue ideal for promotions, printing, and uploads.
 
-🌱 Features:
-- Vegetable Selection: Handpick vegetables from a curated list.
-- Dynamic Pricing: Set prices based on the current market or your own metrics.
-- PNG Catalogue Generator: Once the selection is complete, create a PNG catalogue, perfect for sharing, printing, or uploading to various platforms.
-- Marketing Amplifier: This tool not only aids in easy listing but amplifies your marketing approach with visually appealing catalogues.
+## 🛠️ Built With:
 
-🛠️ How to Use:
-1. Selection: Navigate to the vegetable list and select the ones relevant to your stock.
-2. Pricing: After the selection, set individual prices for each vegetable.
-3. Generate: Once satisfied with the list and the prices, click on the 'Generate Catalogue' button.
+- Vite: A lightning-fast frontend build tool.
+- React: JavaScript library for building user interfaces.
+- @emotion/react: Library for writing CSS styles with JavaScript.
+- i18next & react-i18next: Internationalization-framework for JavaScript offering a complete solution to localize your product from web to mobile and desktop.
+- html-to-image: Convert your HTML node to images.
+
+## 🌱 Features:
+
+- Vegetable Selection: Select desired vegetables from the curated list.
+- Dynamic Pricing: Adjust prices according to the current market trends or as per your preference.
+- PNG Catalogue Generator: Convert your selected list into a printable/shareable PNG format.
+- Marketing Amplifier: Enhance your marketing strategies with a visual treat.
+
+## 🛠️ How to Use:
+
+1. Selection: Access the list of vegetables and select the desired ones.
+2. Pricing: Post selection, set the prices for the selected vegetables.
+3. Generate: Confirm your list and prices and click on 'Generate Catalogue'.
 4. Download/Share: The PNG catalogue file will be generated, ready for download or direct sharing.
 
-🙌 Contribution:
-> Feel free to fork this project, and open a pull request to suggest any changes. All contributions are welcome!
+## 📚 Development:
 
-🔐 License:
->This project is licensed under the MIT License.
+### Install dependencies:
 
-### Install dependencies
-npm install
+> `npm install`
 
-### Run the application
-npm run dev
+### Run the application:
 
-### Install Wrangler CLI
+> `npm run dev`
 
-$ npm install -g wrangler
+### Install Wrangler CLI for Cloudflare deployments:
 
-### Login to Cloudflare account from CLI
+> `npm install -g wrangler`
 
-$ wrangler login
+### Login to your Cloudflare account via CLI:
 
-### Run your build command
+> `wrangler login`
 
-$ npm run build
+### Run the build:
 
-### Create new deployment
+> `npm run build`
 
-$ npx wrangler pages publish dist
+### Deploy to Cloudflare:
+
+> `npx wrangler pages publish dist`
+
+## 🙌 Contribution:
+
+- Open to enhancements & bug-fixes. Feel free to contribute!
+
+## 🔐 License:
+
+- Distributed under the MIT License.
