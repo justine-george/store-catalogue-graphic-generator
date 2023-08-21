@@ -1,5 +1,7 @@
 # Local Business Price Catalogue Generator
 
+**[Try it Live!](https://nanthalathstore-catalogue-generator.pages.dev/)**
+
 A tool made for local businesses to simplify their marketing process. With this application, vendors can select from a range of vegetables, set their desired prices, and generate an elegant PNG catalogue ideal for promotions, printing, and uploads.
 
 ## 🛠️ Built With:
