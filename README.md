@@ -2,18 +2,19 @@
 
 **[Try it Live!](https://nanthalathstore-catalogue-generator.pages.dev/)**
 
-A tool made for local businesses to simplify their marketing process. With this application, vendors can select from a range of vegetables, set their desired prices, and generate an elegant PNG catalogue ideal for promotions, printing, and uploads.
+A tool made for local businesses in Kerala to simplify their marketing process. With this application, vendors can select from a range of vegetables, set their desired prices, and generate an elegant PNG catalogue ideal for promotions, printing, and uploads. Notably, the application is in Malayalam, tailoring to the linguistic preferences of local businesses.
 
 ## 🛠️ Built With:
 
 - Vite: A lightning-fast frontend build tool.
 - React: JavaScript library for building user interfaces.
 - @emotion/react: Library for writing CSS styles with JavaScript.
-- i18next & react-i18next: Internationalization-framework for JavaScript offering a complete solution to localize your product from web to mobile and desktop.
+- i18next & react-i18next: Internationalization-framework for JavaScript, enabling support for Malayalam.
 - html-to-image: Convert your HTML node to images.
 
 ## 🌱 Features:
 
+- Local Language Support: The entire application is in Malayalam, ensuring that local vendors can easily navigate and utilize the tool without any language barrier.
 - Vegetable Selection: Select desired vegetables from the curated list.
 - Dynamic Pricing: Adjust prices according to the current market trends or as per your preference.
 - PNG Catalogue Generator: Convert your selected list into a printable/shareable PNG format.
