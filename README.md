@@ -55,7 +55,7 @@ A tool made for local businesses in Kerala to simplify their marketing process. 
 
 ## 🙌 Contribution:
 
-- Open to enhancements & bug-fixes. Feel free to contribute!
+- Open to enhancements & bug fixes. Feel free to contribute!
 
 ## 🔐 License:
 
