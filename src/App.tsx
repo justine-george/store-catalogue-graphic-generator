@@ -38,6 +38,27 @@ function App() {
     }
   }, [isLoading]);
 
+  // load the data in the localStorage
+  useEffect(() => {
+    const storedVeggies = localStorage.getItem("selectedVeggies");
+    const storedPrices = localStorage.getItem("priceDetails");
+
+    if (storedVeggies) {
+      setSelectedVeggies(JSON.parse(storedVeggies));
+    }
+    if (storedPrices) {
+      setPriceDetails(JSON.parse(storedPrices));
+    }
+  }, []);
+
+  // update localStorage
+  useEffect(() => {
+    localStorage.setItem("selectedVeggies", JSON.stringify(selectedVeggies));
+  }, [selectedVeggies]);
+  useEffect(() => {
+    localStorage.setItem("priceDetails", JSON.stringify(priceDetails));
+  }, [priceDetails]);
+
   // change language to malayalam
   useEffect(() => {
     i18n.changeLanguage("ml");

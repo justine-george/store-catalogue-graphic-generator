@@ -51,7 +51,7 @@ A tool made for local businesses in Kerala to simplify their marketing process. 
 
 ### Deploy to Cloudflare:
 
-> `npx wrangler pages publish dist`
+> `npx wrangler pages deploy dist`
 
 ## 🙌 Contribution:
 
