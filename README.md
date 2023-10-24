@@ -55,4 +55,4 @@ Open to enhancements & bug fixes. Feel free to contribute!
 
 ## License:
 
-Distributed under the MIT License.
+Distributed under the [MIT License](https://raw.githubusercontent.com/justine-george/store-catalogue-graphic-generator/main/LICENSE).
