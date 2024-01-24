@@ -1,4 +1,4 @@
-# Local Business Price Catalogue Generator
+# Local Business Vegetable Price Catalogue Generator
 
 **[Live Demo](https://nanthalathstore-catalogue-generator.pages.dev/)**
 
